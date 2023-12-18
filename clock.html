@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    #clock-container {
+      position: relative;
+    }
+
+    .clock-hand {
+      position: absolute;
+      width: 2px; /* Adjust the width of the clock hands */
+      height: 50px; /* Adjust the length of the clock hands */
+      background-color: black; /* Adjust the color of the clock hands */
+      transform-origin: 50% 100%; /* Rotate from the bottom center */
+      transform: rotate(0deg); /* Initial rotation angle */
+    }
+  </style>
+</head>
+<body>
+  <div id="clock-container">
+    <img src="your-clock-image.jpg" alt="Clock Image" id="clock-image">
+
+    <div class="clock-hand" id="hour-hand"></div>
+    <div class="clock-hand" id="minute-hand"></div>
+    <div class="clock-hand" id="second-hand"></div>
+  </div>
+
+  <script>
+    function updateClockHands() {
+      const now = new Date();
+      const hour = now.getHours() % 12; // Get hour in 12-hour format
+      const minute = now.getMinutes();
+      const second = now.getSeconds();
+
+      const hourHand = document.getElementById('hour-hand');
+      const minuteHand = document.getElementById('minute-hand');
+      const secondHand = document.getElementById('second-hand');
+
+      // Update rotation angles based on current time
+      hourHand.style.transform = `rotate(${hour * 30 + minute * 0.5}deg)`;
+      minuteHand.style.transform = `rotate(${minute * 6 + second * 0.1}deg)`;
+      secondHand.style.transform = `rotate(${second * 6}deg)`;
+    }
+
+    // Update clock hands every second
+    setInterval(updateClockHands, 1000);
+
+    // Initial update
+    updateClockHands();
+  </script>
+</body>
+</html>
